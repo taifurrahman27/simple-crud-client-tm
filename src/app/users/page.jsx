@@ -1,6 +1,7 @@
 import React from 'react';
 import UserTable from '@/components/UserTable';
 import { getUsers } from '../lib/data';
+import { deleteUser } from '../lib/actions';
 
 const UsersPage = async () => {
 
@@ -9,9 +10,9 @@ const UsersPage = async () => {
 
 
     return (
-        <div>
-            <h1>User Management: {users.length} </h1>
-            <UserTable users={users} />
+        <div className="max-w-7xl w-full mx-auto px-5 py-6">
+            <h1 className='text-5xl font-bold text-center text-violet-600 my-6 bg-blue-500/20 p-4 rounded-lg'>User Management: {users.length} </h1>
+            <UserTable users={users} deleteUserAction={deleteUser} />
         </div>
     );
 };

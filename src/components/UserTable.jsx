@@ -1,13 +1,19 @@
-import { Button, Table } from '@heroui/react';
+'use client';
+
+import { AlertDialog, Button, Table } from '@heroui/react';
 import Link from 'next/link';
 import React from 'react';
 
-const UserTable = ({ users }) => {
+const UserTable = ({ users, deleteUserAction }) => {
 
+    const handleDelete = async (userId) => {
+        await deleteUserAction(userId);
+
+    };
 
     return (
-        <div>
-            <Table>
+        <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-2xl p-6 shadow-[0_0_40px_rgba(59,130,246,0.15)]">
+            <Table className="w-full text-xl font-bold text-blue-600">
                 <Table.ScrollContainer>
                     <Table.Content aria-label="Team members" className="min-w-150">
                         <Table.Header>
@@ -27,7 +33,34 @@ const UserTable = ({ users }) => {
                                         <Table.Cell>
                                             <Link href={`/users/${user._id}`}><Button variant="outline">Details</Button></Link>
                                             <Link href={`/users/${user._id}`}><Button variant="ghost">Edit</Button></Link>
-                                            <Button variant="danger">Delete</Button>
+                                            <AlertDialog>
+                                                <Button variant="danger">Delete</Button>
+                                                <AlertDialog.Backdrop>
+                                                    <AlertDialog.Container>
+                                                        <AlertDialog.Dialog className="sm:max-w-150">
+                                                            <AlertDialog.CloseTrigger />
+                                                            <AlertDialog.Header>
+                                                                <AlertDialog.Icon status="danger" />
+                                                                <AlertDialog.Heading>Delete user permanently?</AlertDialog.Heading>
+                                                            </AlertDialog.Header>
+                                                            <AlertDialog.Body>
+                                                                <p>
+                                                                    This will permanently delete <strong>{user.name}</strong> and all of its
+                                                                    data. This action cannot be undone!!
+                                                                </p>
+                                                            </AlertDialog.Body>
+                                                            <AlertDialog.Footer>
+                                                                <Button slot="close" variant="tertiary">
+                                                                    Cancel
+                                                                </Button>
+                                                                <Button onClick={async () => await handleDelete(user._id)} slot="close" variant="danger">
+                                                                    Confirm Delete
+                                                                </Button>
+                                                            </AlertDialog.Footer>
+                                                        </AlertDialog.Dialog>
+                                                    </AlertDialog.Container>
+                                                </AlertDialog.Backdrop>
+                                            </AlertDialog>
                                         </Table.Cell>
                                     </Table.Row>
                                 )
