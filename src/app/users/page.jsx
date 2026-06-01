@@ -1,6 +1,6 @@
 import React from 'react';
-import getUsers from '../lib/data';
 import UserTable from '@/components/UserTable';
+import { getUsers } from '../lib/data';
 
 const UsersPage = async () => {
 

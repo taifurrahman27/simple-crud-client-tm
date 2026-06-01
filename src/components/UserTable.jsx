@@ -1,4 +1,5 @@
-import { Table } from '@heroui/react';
+import { Button, Table } from '@heroui/react';
+import Link from 'next/link';
 import React from 'react';
 
 const UserTable = ({ users }) => {
@@ -23,7 +24,11 @@ const UserTable = ({ users }) => {
                                         <Table.Cell>{user.name}</Table.Cell>
                                         <Table.Cell>{user.email}</Table.Cell>
                                         <Table.Cell>{user.role}</Table.Cell>
-                                        <Table.Cell>Delete</Table.Cell>
+                                        <Table.Cell>
+                                            <Link href={`/users/${user._id}`}><Button variant="outline">Details</Button></Link>
+                                            <Link href={`/users/${user._id}`}><Button variant="ghost">Edit</Button></Link>
+                                            <Button variant="danger">Delete</Button>
+                                        </Table.Cell>
                                     </Table.Row>
                                 )
                             }
