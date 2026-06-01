@@ -3,7 +3,7 @@ import { PersonPlus, Plus } from "@gravity-ui/icons";
 
 import React from 'react';
 
-const AddUserModal = () => {
+const AddUserModal = ({ createUserAction }) => {
     return (
         <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-2xl px-6 shadow-[0_0_40px_rgba(59,130,246,0.15)]">
 
@@ -17,14 +17,11 @@ const AddUserModal = () => {
                                 <Modal.Icon className="bg-accent-soft text-accent-soft-foreground">
                                     <PersonPlus className="size-5" />
                                 </Modal.Icon>
-                                <Modal.Heading>Add a new user</Modal.Heading>
-                                <p className="mt-1.5 text-sm leading-5 text-muted">
-                                    Fill out the form below and we will get back to you.
-                                </p>
+                                <Modal.Heading className='text-blue-500'>Add a new user</Modal.Heading>
                             </Modal.Header>
-                            <Modal.Body className="p-6">
+                            <Modal.Body className="p-5">
                                 <Surface variant="default">
-                                    <form className="flex flex-col gap-4">
+                                    <form action={createUserAction} className="flex flex-col gap-4">
                                         <TextField className="w-full" name="name" type="text" variant="secondary">
                                             <Label>Name</Label>
                                             <Input placeholder="Enter your name" />
@@ -37,16 +34,16 @@ const AddUserModal = () => {
                                             <Label>Role</Label>
                                             <Input placeholder="Enter your role" />
                                         </TextField>
-
+                                        <Modal.Footer>
+                                            <Button slot="close" variant="secondary">
+                                                Cancel
+                                            </Button>
+                                            <Button type='submit' slot="close">Add User</Button>
+                                        </Modal.Footer>
                                     </form>
                                 </Surface>
                             </Modal.Body>
-                            <Modal.Footer>
-                                <Button slot="close" variant="secondary">
-                                    Cancel
-                                </Button>
-                                <Button slot="close">Add User</Button>
-                            </Modal.Footer>
+
                         </Modal.Dialog>
                     </Modal.Container>
                 </Modal.Backdrop>
